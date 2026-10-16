@@ -19,7 +19,7 @@ Com base nas medições realizadas (médias de múltiplas execuções para lista
 | 500 | ~0.00430 | ~0.00085 | ~0.00002 | ~62.000 | ~2.300 |
 | 1000 | ~0.01850 | ~0.00140 | ~0.00005 | ~251.000 | ~5.000 |
 
-*(Nota: Os dados exatos brutos encontram-se no arquivo `dados.csv` gerado pela execução do script).*
+*(Nota: Os dados exatos brutos encontram-se no arquivo `dados.csv` gerado pela execução do script)*
 
 ## 2. Gráficos de Desempenho
 
