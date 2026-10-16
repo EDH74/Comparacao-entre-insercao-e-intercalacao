@@ -1,52 +1,31 @@
-import time
-from random import randrange
-import ordenacao
-import threading
+# testes.py
+import unittest
+from ordenacao import insertion_sort, merge_sort
 
-def testeInsertion(arr):
-    insertionSort = ordenacao.ordenacao()
-    
-    #abrindo um thread para ele realizar o teste1
-    inicio = time.perf_counter()
-    resultado = insertionSort.insertion_sort(arr)
-    fim = time.perf_counter()
-    
-    #pegando a diferenca entre quando comecou a iniciar e terminou
-    tempoTot = (fim - inicio)
-    return {"tempo":tempoTot, "quantidadeOperacoes": resultado[1], "arr":resultado[0]}
+class TesteOrdenacao(unittest.TestCase):
 
-def testeMerge(arr):
-    insertionSort = ordenacao.ordenacao()
-    
-    #abrindo um thread para ele realizar o teste1
-    inicio = time.perf_counter()
-    resultado = insertionSort.merge_sort(arr)
-    fim = time.perf_counter()
-    
-    #pegando a diferenca entre quando comecou a iniciar e terminou
-    tempoTot = (fim - inicio)
-    return {"tempo":tempoTot, "quantidadeOperacoes": resultado[1], "arr":resultado[0]}
+    def setUp(self):
+        self.casos_teste = {
+            "lista_vazia": [],
+            "um_elemento": [42],
+            "elementos_iguais": [7, 7, 7, 7, 7, 7],
+            "ja_ordenada": [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            "lista_invertida": [9, 8, 7, 6, 5, 4, 3, 2, 1],
+            "elementos_negativos_e_mistos": [-5, 3, 0, -2, 10, 3, -5],
+            "lista_duplicados_aleatorios": [4, 2, 5, 2, 3, 1, 4]
+        }
 
-#Gerando Objeto com arrays para ser ordenado
-nEle = [5, 10, 20, 30, 50, 75, 100, 200, 500, 1000]
-objArr = {}
-arrVazio = []
+    def test_insertion_sort(self):
+        for nome, lista in self.casos_teste.items():
+            esperado = sorted(lista)
+            resultado, _ = insertion_sort(lista)
+            self.assertEqual(resultado, esperado, f"Falha no Insertion Sort para o caso: {nome}")
 
-for i in nEle:
-    objArr[i] = []
-    for j in range(i):
-        objArr[i].append(randrange(0, i)) 
-    
-arrInvertido = objArr[1000].copy()
-arrInvertido.sort(reverse=True)
+    def test_merge_sort(self):
+        for nome, lista in self.casos_teste.items():
+            esperado = sorted(lista)
+            resultado, _ = merge_sort(lista)
+            self.assertEqual(resultado, esperado, f"Falha no Merge Sort para o caso: {nome}")
 
-#TestesInsertion
-rep = 10
-mediaTempo = 0
-
-#teste casos dificeis
-
-
-#teste nos elementos
-
-
+if __name__ == "__main__":
+    unittest.main()
